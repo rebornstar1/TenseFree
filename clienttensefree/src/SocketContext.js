@@ -1,4 +1,4 @@
-import React, { Children, createContext } from 'react'
+import React, { children, createContext } from 'react'
 import { createElement,useState,useEffect,useRef } from 'react'
 import { io } from 'socket.io-client';
 import Peer from 'simple-peer';
@@ -6,7 +6,7 @@ import Peer from 'simple-peer';
 const SocketContext  = createContext();
 const socket  = io('http://localhost:3000/')
 
-const ContextProvider = ({ Children}) => {
+const ContextProvider = ({ children}) => {
   
   const [stream,Setstream] = useState(null);
   const [me,Setme] = useState('');
@@ -23,7 +23,11 @@ const ContextProvider = ({ Children}) => {
     .then((currentStream)=>{
         Setstream(currentStream);
 
-        myVideo.current.srcObject = currentStream; // This Might Throw error if my video is not functioning then check this part first
+        if (myVideo.current) 
+        {
+            myVideo.current.srcObject = currentStream;
+        }
+       // myVideo.current.srcObject = currentStream; // This Might Throw error if my video is not functioning then check this part first
         
       })
 
@@ -94,9 +98,10 @@ const ContextProvider = ({ Children}) => {
        me,
        callUser,
        answerCall,
-       leaveCall
+       leaveCall,
+       stream
       }}>
-        {Children}
+        {children}
       </SocketContext.Provider>
     )
 }
