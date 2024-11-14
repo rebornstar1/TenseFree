@@ -1,7 +1,10 @@
 import express from 'express';
-import server from 'http';
+import http from 'http';
 import cors from 'cors';
 import { Server } from "socket.io";
+
+const app = express();
+const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
@@ -9,8 +12,6 @@ const io = new Server(server, {
         methods: ["GET", "POST"]
     }
 });
-
-const app = express();
 
 const PORT = 8000;
 app.use(cors());
@@ -22,7 +23,7 @@ app.get('/',(req,res)=>{
 io.on("connection",(socket)=> {
    
     socket.emit("me",socket.id);
-
+    console.log("Testing Purposes");
     socket.on("disconnect", () =>
     {
         socket.broadcast.emit("Call Has Been Ended");
@@ -40,7 +41,7 @@ io.on("connection",(socket)=> {
     )
 })
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Server is Running on the Port ${PORT}`);
 })
 

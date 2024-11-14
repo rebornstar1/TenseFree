@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@material-ui/core": "^4.12.4",
+    "@mui/material": "^6.1.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,6 +14,7 @@
     "copy-to-clipboard": "^3.3.3",
     "cors": "^2.8.5",
     "express": "^4.21.0",
+    "gmeetclone": "file:",
     "nodemon": "^3.1.7",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Options from './Options'
 import { SocketContext } from '../SocketContext'
 
@@ -17,6 +17,13 @@ function VideoPlayer() {
         leaveCall,
         stream
      } = useContext(SocketContext);
+
+     useEffect(() => {
+        if (stream) {
+          myVideo.current.srcObject = stream;
+        }
+      }, [stream]);
+
   return (
     <div>
         {
